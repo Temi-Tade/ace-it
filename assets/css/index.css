@@ -1,0 +1,231 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Ubuntu;
+    transition: .5s;
+    letter-spacing: .95px;
+}
+
+*:focus{
+    outline: none;
+}
+
+:root{
+    --theme: #3451f7;
+    --text-color: #ddd;
+    --bgcolor: #333E;
+}
+
+@keyframes blink{
+    from{
+        opacity: 0
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+html{
+    background-color: var(--bgcolor);
+    color: var(--text-color);
+    font-family: Ubuntu;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem;
+    box-shadow: 1px 1px 1px #7777;
+}
+
+button{
+    background: linear-gradient(to right, var(--theme), #f72342);
+    border: 0;
+    color: var(--text-color);
+    padding: .75rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover{
+    background: linear-gradient(to left, var(--theme), #f72342);
+}
+
+.collapse{
+    max-height: 0;
+    overflow: hidden;
+}
+
+.expand{
+    /* border: .5px dashed; */
+    max-height: 25rem;
+    background-color: #333;
+}
+
+/* footer{
+    background-color: var(--theme);
+    padding: .5rem;
+    height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+footer p{
+    text-align: center;
+}
+
+footer small{
+    display: flex;
+    justify-content: space-between;
+}
+
+footer a{
+    color: var(--text-color);
+    padding: 0 1rem;
+} */
+
+@media screen and (max-width: 600px) {
+    .desktop{
+        display: none;
+    }
+
+    .mobile{
+        display: block;
+    }
+
+    #content{
+        padding: .75rem;
+    }
+
+    #intro{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    #intro h2{
+        font-size: 4rem;
+        background: linear-gradient(to right, var(--theme), #f72342);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+    }
+
+    #dynamic{
+        font-size: 2rem;
+        padding: 1rem 0;
+    }
+
+    #dynamic::after{
+        padding: 0 .1rem;
+        height: .4rem;
+        width: .75rem;
+        display: inline-block;
+        background-color: var(--theme);
+        content: "";
+        animation: blink .85s infinite linear;
+    }
+
+    #about{
+        padding: .5rem;
+        line-height: 1.2rem;
+    }
+
+    .btn-wrap{
+        padding: .5rem;
+        padding-top: 3rem;
+    }
+
+    .collapse{
+        max-height: 0;
+        overflow: hidden;
+    }
+
+    .expand{
+        /* border: .5px dashed; */
+        height: 8rem;
+        max-height: 15rem;
+        background-color: #333;
+    }
+
+    #options ul{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1rem;
+    }
+
+    #options ul button{
+        margin: .125rem 0;
+    }
+}
+
+/* Style for large screens */
+@media screen and (min-width: 600px) {
+    .mobile{
+        display: none;
+    }
+    
+    .desktop{
+        display: block;
+    }
+
+    #intro{
+        text-align: center;
+    }
+    
+    #intro h2{
+        font-size: 8rem;
+        text-align: center;
+        background: linear-gradient(to right, var(--theme), #f72342);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+    }
+    
+    #content{
+        display: flex;
+    }
+
+    #sidebar{
+        padding: .5rem;
+    }
+
+    #options{
+        margin-top: 1rem;
+    }
+
+    #options ul{
+        height: 7rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #about{
+        font-size: 1.25rem;
+        margin-top: 4rem;
+    }
+
+    #dynamic{
+        font-size: 3.5rem;
+        padding: 3rem 0;
+    }
+
+    #dynamic::after{
+        padding: 0 .1rem;
+        height: .75rem;
+        width: 1rem;
+        display: inline-block;
+        background-color: var(--theme);
+        content: "";
+        animation: blink .85s infinite linear;
+    }
+}

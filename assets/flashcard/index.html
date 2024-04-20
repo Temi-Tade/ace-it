@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    <title>Ace It! | New Flashcard</title>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>New Flashcard <span></span></h1>
+        </header>
+
+        <section id="info">
+            <div>
+                <h2></h2>
+                <span><em></em></span>
+            </div>
+        </section>
+
+        <section id="flashcard-name">
+            <form autocomplete="off" spellcheck="false">
+                <fieldset>
+                    <legend>Flashcard Information</legend>
+                    <div class="field">
+                        <input type="text" id="fname" name="fname" placeholder="Name of Flashcard Material" class="req" oninput="VALIDATE_FLASHCARD_NAME(this.value)" value="BIOLOGY">
+                     </div>
+         
+                     <div class="field">
+                         <textarea name="desc" id="desc" cols="30" rows="5" class="opt" placeholder="Description(Optional)" oninput="SET_DESC(this.value)"></textarea>
+                     </div>
+
+                     <div class="btn-wrap">
+                        <button type="submit" id="flashcard-name-btn" onclick="TOGGLE_FORMS(event, this.parentElement.parentElement.parentElement.parentElement, document.querySelector('#flashcard-data'))" disabled>Next <i class="fa-solid fa-arrow-right"></i></button>
+                     </div>
+                </fieldset>
+            </form>
+        </section>
+
+        <section id="flashcard-data">
+            <form autocomplete="off" spellcheck="false">
+                <div id="flashcard-form">
+                    <div class="field">
+                        <input type="text" name="term" id="term" placeholder="Term" class="req" require>
+                     </div>
+     
+                     <div class="field">
+                         <input type="text" name="def" id="def" placeholder="Definition" class="req" requir>
+                      </div>
+                      <hr>
+                </div>
+
+                 <div class="btn-wrap">
+                    <button type="submit">Add New Flashcard <i class="fa-solid fa-plus"></i></button>
+                 </div>
+            </form>
+
+            <div id="flashcard-preview">
+                <h4>Preview</h4>
+                <div id="preview"></div>
+                <div id="flashcard-actions">
+                    <ul id="action-list" type="none">
+                        <li><button class="fa-solid fa-caret-left" title="Previous"></button></li>
+                        <li><button class="fa-solid fa-edit" title="Edit" onclick="CREATE_MODAL('')"></button></li>
+                        <li><button class="fa-solid fa-caret-right" title="Next"></button></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="modalbg">
+            <div id="modal">{text}</div>
+        </section>
+    </main>
+
+    <script src="./flashcard.js"></script>
+</body>
+</html>
+
+<!-- 
+    OOP, flashcard class
+    props: term, definition, que, ans
+    future features: autoplay, text formatting
+ -->

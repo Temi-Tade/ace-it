@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    <title>Ace It!</title>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Ace It!</h1>
+            <nav>
+                <ul type="none">
+                    <li><button>Theme</button></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="modal-bg">
+            <div id="modal"></div>
+        </div>
+
+        <section id="content">
+            <section id="sidebar" class="desktop">
+                <div>
+                    <div class="btn-wrap">
+                        <button onclick="TOGGLE_MATERIALS_LIST(this.parentElement)">Create New Study Material <i class="fa-solid fa-plus"></i></button>
+                    </div>
+
+                    <div id="options" class="collapse">
+                        <ul type="none">
+                            <li><button onclick="window.open(`./assets/flashcard/index.html`)">New Flashcard <i class="fa-solid fa-flashcard"></i></button></li>
+                            <li><button>New Quiz <i class="fa-soild fa-quiz"></i></button></li>
+                        </ul>
+                    </div>
+            </section>
+
+            <section id="intro">
+                <h2>Ace It!</h2>
+                <div id="text-effect">
+                    <p id="dynamic">Simple.</p>
+                </div>
+    
+                <div id="about">
+                    <p>Welcome to Ace It! Your tool for creating study materials (flashcards and quizzes) on the web!</p>
+                </div>
+
+                <div class="mobile">
+                    <div class="btn-wrap">
+                        <button onclick="TOGGLE_MATERIALS_LIST(this.parentElement)">Create New Study Material <i class="fa-solid fa-plus"></i></button>
+                    </div>
+
+                    <div id="options" class="collapse">
+                        <ul type="none">
+                            <li><button onclick="window.open(`./assets/flashcard/index.html`)">New Flashcard <i class="fa-solid fa-flashcard"></i></button></li>
+                            <li><button>New Quiz <i class="fa-soild fa-quiz"></i></button></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- <footer>
+            <p>Created by Temiloluwa Akintade.</p>
+            <div>
+                <small>
+                    <a href="mailto:devmode006@gmail.com">Report a Bug</a>
+                    <a href="https://github.com/Temi-Tade/">GitHub Profile</a>
+                </small>
+            </div>
+        </footer> -->
+    </main>
+    <script src="./assets/js/index.js"></script>
+</body>
+</html>
+
+<!-- 
+    text effect showing what the tool does
+    area for creating quiz/fc
+    data needed: name, 
+ -->

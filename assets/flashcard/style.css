@@ -1,0 +1,126 @@
+form{
+    padding: .5rem;
+    width: 80%;
+    margin: 1rem auto;
+}
+
+::placeholder{
+    color: var(--text-color);
+}
+
+input, textarea{
+    display: block;
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1.25px solid var(--text-color);
+    padding: .75rem;
+    resize: none;
+    border-radius: .5rem;
+    width: 80%;
+    margin: .75rem auto;
+    font-size: 1rem;
+}
+
+legend{
+    padding: .5rem;
+}
+
+.btn-wrap{
+    padding: .5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#flashcard-data{
+    display: none;
+    justify-content: space-between;
+    border: 1px solid red;
+    width: 95%;
+    margin: .5rem auto;
+}
+
+#flashcard-data form{
+    margin: 1rem;
+    width: 70%;
+}
+
+#flashcard-preview{
+    border: 1px solid yellow;
+    height: 25rem;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+:disabled{
+    background: #7777;
+}
+
+:disabled:hover{
+    background: #7777;
+}
+
+#info{
+    text-align: center;
+    width: 100%;
+    display: flex;
+    padding: .75rem;
+}
+
+#edit{
+    background: transparent;
+}
+
+#action-list{
+    border: 1px solid;
+    display: flex;
+    justify-content: space-around;
+    padding: .5rem 0;
+}
+
+#action-list button{
+    border-radius: 50%;
+}
+
+#modalbg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #7777;
+    padding-top: 20dvh;
+    display: none;
+}
+
+#modal{
+    background-color: var(--bgcolor);
+    padding: 1rem;
+    width: 80dvw;
+    border-radius: .75rem;
+    color: var(--text-color);
+    margin: auto;
+}
+
+.card-wrap{
+    border: 1px solid red;
+    padding: .125rem;
+    height: 20rem;
+    border-radius: .5rem;
+    background-color: #222;
+    cursor: pointer;
+}
+
+.card{
+    text-align: center;
+    border: 1px solid green;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card p{
+    font-size: 150%;
+}
