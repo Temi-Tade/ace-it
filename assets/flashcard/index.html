@@ -62,14 +62,27 @@
 
             <div id="flashcard-preview">
                 <h4>Preview</h4>
+                <span id="flashcard-count"></span>
                 <div id="preview"></div>
+                <div id="flashcard-progress-wrap">
+                    <div id="progress">
+                        <span id="level"></span>
+                    </div>
+                </div>
+                <div id="contextmenu">
+                    <button onclick="DELETE_FLASHCARD()">Delete Flashcard</button>
+                </div>
                 <div id="flashcard-actions">
                     <ul id="action-list" type="none">
-                        <li><button class="fa-solid fa-caret-left" title="Previous"></button></li>
-                        <li><button class="fa-solid fa-edit" title="Edit" onclick="CREATE_MODAL('')"></button></li>
-                        <li><button class="fa-solid fa-caret-right" title="Next"></button></li>
+                        <li><button class="fa-solid fa-caret-left" title="Previous" onclick="GO_TO_PREV_CARD()"></button></li>
+                        <li><button class="fa-solid fa-edit" title="Edit" id="edit-flashcard-btn"></button></li>
+                        <li><button class="fa-solid fa-caret-right" title="Next" onclick="GO_TO_NEXT_CARD()"></button></li>
                     </ul>
                 </div>
+            </div>
+
+            <div class="mobile preview-wrap">
+                <button>Preview Flashcards</button>
             </div>
         </section>
 
@@ -85,5 +98,9 @@
 <!-- 
     OOP, flashcard class
     props: term, definition, que, ans
-    future features: autoplay, text formatting
+    future features: autoplay, text formatting, disbale buttons when card array is empty, auth
+    progress(bar, current/length)
+    delete card
+    integrate firebase
+    disable flashcard form submit btn
  -->
