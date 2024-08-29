@@ -18,15 +18,17 @@ const TOGGLE_FORMS = (e, el, other) => {
     let sessionData = JSON.parse(sessionStorage.getItem("ace-it-data"))
     document.querySelector("#info h2").innerHTML = sessionData.name
     document.querySelector("#info em").innerHTML = sessionData.desc
-    document.querySelector("#info").innerHTML += `<button id="edit" title="Edit"><i class="fa-solid fa-edit"></i></button>`
+    document.querySelector("#edit-info").innerHTML = '<button id="edit" title="Edit"><i class="fa-solid fa-edit"></i></button>'
     document.querySelector("#edit").onclick = () => {
         document.querySelector("#flashcard-data").style.display = "none"
         document.querySelector("#flashcard-name").style.display = "block"
         document.querySelector("#info").innerHTML = `
         <div>
             <h2></h2>
-            <span><em></em></span>
-        </div>`
+            <span id="edit-info"></span>
+        </div>
+        <p id="tagline"><em></em></p>
+        `
     }
 }
 
@@ -145,7 +147,16 @@ class Flashcard{
         document.querySelector("#modal form").onsubmit = (e) => {
             e.preventDefault();
             cards[i] = new Flashcard(document.querySelector("#modal form #term").value, document.querySelector("#modal form #def").value);
-            ADD_CARD()
+            ADD_CARD();
+            document.querySelector("#modalbg").animate({
+                opacity: ["1", "0"],
+            }, {
+                iterations: 1,
+                duration: 500
+            })
+            setTimeout(() => {
+                document.querySelector("#modalbg").style.display = "none"
+            }, 490);
         }
     }
 }
@@ -153,7 +164,17 @@ class Flashcard{
 document.querySelector("#flashcard-data form").onsubmit = (ev) => {
     ev.preventDefault();
     if (window.innerWidth <= 420) {
-        TOGGLE_FORMS(ev, document.querySelector("#flashcard-data form"), document.querySelector("#flashcard-preview"));
+        document.querySelector("#set-up_prev").onclick = function (){
+            if (this.classList.contains("set-up")) {
+                TOGGLE_FORMS(ev, document.querySelector("#flashcard-data form"), document.querySelector("#flashcard-preview"));
+                this.textContent = "Go back to setup page";
+                this.removeAttribute("class");
+            } else {
+                TOGGLE_FORMS(ev, document.querySelector("#flashcard-preview"), document.querySelector("#flashcard-data form"));
+                this.textContent = "Preview Flashcards";
+                this.setAttribute("class", "set-up");
+            }
+        }
     }
     let card = new Flashcard(document.querySelector("#flashcard-data form #term").value, document.querySelector("#flashcard-data form #def").value);
     card.add();

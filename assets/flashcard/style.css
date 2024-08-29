@@ -76,9 +76,15 @@ legend{
 #info{
     text-align: center;
     width: 100%;
-    display: flex;
-    align-items: center;
     padding: .75rem;
+}
+
+#info div{
+    display: flex;
+}
+
+#tagline{
+    text-align: left;
 }
 
 #edit{
@@ -143,6 +149,7 @@ legend{
 }
 
 #flashcard-count{
+    display: block;
     text-align: center;
     padding: .25rem;
 }
@@ -195,6 +202,10 @@ legend{
     main{
         position: relative;
         height: 100%;
+    }
+
+    #flashcard-data{
+        height: 300rem;
     }
 
     #flashcard-data form{
