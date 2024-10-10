@@ -5,11 +5,12 @@ form{
 }
 
 ::placeholder{
-    color: var(--text-color);
+    color: #aaa;
 }
 
 .field{
     margin: 1rem auto;
+    justify-content: flex-end;
 }
 
 input, textarea{
@@ -32,7 +33,7 @@ legend{
 .btn-wrap{
     padding: .5rem;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 #flashcard-data{
@@ -44,7 +45,8 @@ legend{
     background-color: #222;
     padding: 1rem;
     border-radius: 1rem;
-    max-height: 30rem;
+    height: 30rem;
+    max-height: 40rem;
 }
 
 #flashcard-data form{
@@ -125,6 +127,37 @@ legend{
     margin: auto;
 }
 
+#recent-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#recent-actions{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+#recent-actions button{
+    text-transform: uppercase
+}
+
+#recent-actions button:last-child{
+    background: #f12312;
+}
+
+#modal table{
+    width: 100%;
+    padding: .5rem;
+}
+
+#modal th, #modal td{
+    text-align: center;
+    padding: 1rem;
+}
+
 .card-wrap{
     padding: .125rem;
     height: 20rem;
@@ -182,11 +215,15 @@ legend{
     display: none;
 }
 
+form h3{
+    text-align: center;
+}
+
 .mobile{
     display: none;
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 600px) {
     .mobile{
         display: block;
     }
@@ -205,7 +242,7 @@ legend{
     }
 
     #flashcard-data{
-        height: 300rem;
+        height: 30rem;
     }
 
     #flashcard-data form{

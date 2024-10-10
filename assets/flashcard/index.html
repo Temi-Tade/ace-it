@@ -76,7 +76,7 @@
                 <div id="flashcard-actions">
                     <ul id="action-list" type="none">
                         <li><button class="fa-solid fa-caret-left" title="Previous" onclick="GO_TO_PREV_CARD()"></button></li>
-                        <li><button class="fa-solid fa-edit" title="Edit" id="edit-flashcard-btn"></button></li>
+                        <li><button class="fa-solid fa-edit" title="Edit" id="edit-flashcard-btn" onclick="EDIT_CARD()"></button></li>
                         <li><button class="fa-solid fa-caret-right" title="Next" onclick="GO_TO_NEXT_CARD()"></button></li>
                     </ul>
                 </div>
@@ -92,13 +92,14 @@
         </section>
     </main>
 
+    <script src="../js/userdata.js"></script>
     <script src="./flashcard.js"></script>
 </body>
 </html>
 
 <!-- 
-    props: term, definition, que, ans
-    future features: autoplay, text formatting, disbale buttons when card array is empty, auth, go to
+    future features: autoplay, text formatting, disbale buttons when card array is empty
+    go to
     integrate firebase
     disable flashcard form submit btn
  -->

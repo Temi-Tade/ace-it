@@ -65,29 +65,37 @@ button:hover{
     background-color: #333;
 }
 
-/* footer{
-    background-color: var(--theme);
-    padding: .5rem;
-    height: 4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-}
-
-footer p{
+#recent h3{
     text-align: center;
 }
 
-footer small{
+#no-flashcard{
+    text-align: center;
+}
+
+#recent ul{
+    padding: .5rem .25rem;
+}
+
+#recent ul li{
+    margin: .25rem 0;
+    padding: .25rem;
+    border-bottom: 1px solid;
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
-footer a{
-    color: var(--text-color);
-    padding: 0 1rem;
-} */
+#recent button{
+    width: 100%;
+    background: transparent;
+    text-align: left;
+    padding: 1rem;
+}
+
+#recent button:hover{
+    background-color: #3337;
+}
 
 @media screen and (max-width: 600px) {
     .desktop{
@@ -149,7 +157,6 @@ footer a{
 
     .expand{
         /* border: .5px dashed; */
-        height: 8rem;
         max-height: 15rem;
         background-color: #333;
     }
@@ -163,6 +170,14 @@ footer a{
 
     #options ul button{
         margin: .125rem 0;
+    }
+
+    #recent{
+        padding: .5rem;
+    }
+
+    #recent button{
+        margin-bottom: .5rem;
     }
 }
 
@@ -178,6 +193,7 @@ footer a{
 
     #intro{
         text-align: center;
+        width: 100%;
     }
     
     #intro h2{
@@ -190,10 +206,11 @@ footer a{
     }
     
     #content{
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
     }
 
-    #sidebar{
+    #sidebar, #recent{
         padding: .5rem;
     }
 
