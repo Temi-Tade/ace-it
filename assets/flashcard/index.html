@@ -46,6 +46,7 @@
         <section id="flashcard-data">
             <form autocomplete="off" spellcheck="false">
                 <div id="flashcard-form">
+                    <div class="mobile number">No flashcards added yet.</div>
                     <div class="field">
                         <input type="text" name="term" id="term" placeholder="Term" class="req" require>
                      </div>
@@ -83,7 +84,7 @@
             </div>
 
             <div class="mobile preview-wrap">
-                <button id="set-up_prev" class="set-up">Preview Flashcards</button>
+                <button id="set-up_prev" class="set-up" onclick="MOBILE_PREVIEW(this)">Preview Flashcards</button>
             </div>
         </section>
 
@@ -102,4 +103,6 @@
     go to
     integrate firebase
     disable flashcard form submit btn
+
+    card count after deletion bug
  -->

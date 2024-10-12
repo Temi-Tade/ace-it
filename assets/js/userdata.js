@@ -78,16 +78,3 @@ if ("indexedDB" in window) {
 } else {
     
 }
-
-// window.onclick = function(){
-//     navigator.share({
-//         text: "Test",
-//         title: "Sharing",
-//         // url: window.location.href,
-//         // files: [new File("l","../index.html")]
-//     })
-    
-//     .then(res => {
-//         console.log(res)
-//     })
-// }

@@ -167,9 +167,12 @@ legend{
 }
 
 .card{
+    padding: 1rem;
+    text-overflow:ellipsis;
     text-align: center;
     height: 100%;
     display: flex;
+    overflow-x: hidden;
     overflow-y: auto;
     flex-direction: column;
     justify-content: center;
@@ -265,5 +268,10 @@ form h3{
     .preview-wrap button{
         display: block;
         margin: auto;
+    }
+
+    .number{
+        text-align: center;
+        transform: translateY(-3rem);
     }
 }

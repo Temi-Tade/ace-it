@@ -1,6 +1,13 @@
 let index = 0;
 let card;
-var flashcardData = JSON.parse(sessionStorage.getItem("ace-it temp data"));
+var flashcardData = JSON.parse(sessionStorage.getItem("ace-it temp data")) || {
+    name: "",
+    desc : "",
+    flashcards: [],
+    number: 0,
+    id : crypto.randomUUID(),
+    created : new Date().toUTCString(),
+};
 
 const TOGGLE_FORMS = (e, el, other) => {
     e.preventDefault();
@@ -98,7 +105,7 @@ const PREVIEW_CARD = (index) => {
 
     SHOW_MENU = (e) => {
         e.preventDefault();
-        document.querySelector("#contextmenu").style = `display: block; top: ${e.offsetY}px; left: ${e.offsetX - 200}px`;
+        document.querySelector("#contextmenu").style = `display: block; top: ${e.offsetY}px; left: ${e.offsetX}px`;
         window.onclick = (e) => {
             if (e.target !== document.querySelector("#contextmenu")) {
                 document.querySelector("#contextmenu").style.display = "none";
@@ -167,6 +174,7 @@ class Flashcard{
     }
     delete(ind){
         flashcardData.flashcards.splice(ind, 1);
+        flashcardData.number = flashcardData.flashcards.length;
     }
     edit(i){
         CREATE_MODAL(`
@@ -202,36 +210,58 @@ class Flashcard{
     }
 }
 
+// if (window.innerWidth <= 420) {
+//     document.querySelector("#set-up_prev").onclick = function (){
+//         if (this.classList.contains("set-up")) {
+//             TOGGLE_FORMS(ev, document.querySelector("#flashcard-data form"), document.querySelector("#flashcard-preview"));
+//             this.textContent = "Go back to setup page";
+//             this.removeAttribute("class");
+//         } else {
+//             TOGGLE_FORMS(ev, document.querySelector("#flashcard-preview"), document.querySelector("#flashcard-data form"));
+//             this.textContent = "Preview Flashcards";
+//             this.setAttribute("class", "set-up");
+//         }
+//     }
+// }
+
+function MOBILE_PREVIEW(el) {
+    if (el.classList.contains("set-up")) {
+        document.querySelector("#flashcard-preview").style.display = "block";
+        document.querySelector("#flashcard-data form").style.display = "none";
+        el.textContent = "Go back to setup page";
+        el.removeAttribute("class");
+    } else {
+        document.querySelector("#flashcard-preview").style.display = "none";
+        document.querySelector("#flashcard-data form").style.display = "block";
+        el.textContent = "Preview Flashcards";
+        el.setAttribute("class", "set-up");
+    }
+}
+
 document.querySelector("#flashcard-data form").onsubmit = (ev) => {
     ev.preventDefault();
-    if (window.innerWidth <= 420) {
-        document.querySelector("#set-up_prev").onclick = function (){
-            if (this.classList.contains("set-up")) {
-                TOGGLE_FORMS(ev, document.querySelector("#flashcard-data form"), document.querySelector("#flashcard-preview"));
-                this.textContent = "Go back to setup page";
-                this.removeAttribute("class");
-            } else {
-                TOGGLE_FORMS(ev, document.querySelector("#flashcard-preview"), document.querySelector("#flashcard-data form"));
-                this.textContent = "Preview Flashcards";
-                this.setAttribute("class", "set-up");
-            }
-        }
-    }
-     card = new Flashcard(document.querySelector("#flashcard-data form #term").value, document.querySelector("#flashcard-data form #def").value);
+    card = new Flashcard(document.querySelector("#flashcard-data form #term").value, document.querySelector("#flashcard-data form #def").value);
     card.add();
     ADD_CARD();
+    FLASHCARD_COUNT();
     document.querySelector("#flashcard-data form").reset();
 
     // document.querySelector("#edit-flashcard-btn").onclick = () => {
     //     card.edit(index);
     // }
+}
 
-    document.querySelector("#contextmenu button").onclick = () => {
-        card.delete(index);
-        PREVIEW_CARD(flashcardData.flashcards[0].term);
-        FLASHCARD_COUNT();
-        SET_PROGRESS();
-    }
+function DELETE_FLASHCARD(){
+    card = new Flashcard(flashcardData.flashcards[index].term, flashcardData.flashcards[index].def);
+    card.delete(index);
+    console.log(flashcardData);
+    var trx = request.result.transaction("flashcards", "readwrite");
+    var flashcardObjStore = trx.objectStore("flashcards");
+    flashcardObjStore.put(flashcardData);
+    
+    PREVIEW_CARD(flashcardData.flashcards[0].term);
+    FLASHCARD_COUNT();
+    SET_PROGRESS();
 }
 
 function EDIT_CARD(){
@@ -260,7 +290,7 @@ const GO_TO_NEXT_CARD = () => {
         index++;
         // console.log(flashcardData.flashcards[index].def);
         console.log(index);
-        if (index > flashcardData.flashcards.length - 1) {
+        if (index >= flashcardData.flashcards.length - 1) {
             index = flashcardData.flashcards.length - 1;
         }
         PREVIEW_CARD(flashcardData.flashcards[index].term);
@@ -273,6 +303,7 @@ const GO_TO_NEXT_CARD = () => {
 
 const FLASHCARD_COUNT = () => {
     document.querySelector("#flashcard-count").innerHTML = `${index+1} of ${flashcardData.flashcards.length}`;
+    document.querySelector(".number").innerHTML = flashcardData.flashcards.length ? `${flashcardData.flashcards.length} ${flashcardData.flashcards.length > 1 ? "flashcards" : "flashcard"} added` : "No flashcards added yet.";
 }
 
 const SET_PROGRESS = () => {
@@ -288,7 +319,7 @@ if (sessionStorage.getItem("ace-it temp data")) {
         x.onsuccess = function (ev) {
             sessionStorage.setItem("ace-it temp data", JSON.stringify(ev.target.result));
             flashcardData = ev.target.result;
-            PREVIEW_CARD(flashcardData.flashcards[0].       term);
+            PREVIEW_CARD(flashcardData.flashcards[0].term);
             ADD_CARD();
             SET_PROGRESS();
             FLASHCARD_COUNT();
@@ -309,8 +340,8 @@ if (sessionStorage.getItem("ace-it temp data")) {
     if (flashcardData.flashcards.length) {
         PREVIEW_CARD(flashcardData.flashcards[0].term);
     }
-    PREVIEW_CARD(flashcardData.flashcards[0].term);
-    ADD_CARD();
+    // PREVIEW_CARD(flashcardData.flashcards[0].term);
+    // ADD_CARD();
     SET_PROGRESS();
     FLASHCARD_COUNT();
 }
