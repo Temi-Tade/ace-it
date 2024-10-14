@@ -125,6 +125,7 @@ legend{
     border-radius: .75rem;
     color: var(--text-color);
     margin: auto;
+    text-align: center;
 }
 
 #recent-info{
@@ -167,7 +168,8 @@ legend{
 }
 
 .card{
-    padding: 1rem;
+    padding: 1.5rem;
+    padding-top: 2rem;
     text-overflow:ellipsis;
     text-align: center;
     height: 100%;

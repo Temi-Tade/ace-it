@@ -79,8 +79,6 @@ const CREATE_MODAL = (text) => {
 }
 
 function ROTATE_CARD(card) {
-    // console.log(flashcardData.flashcards[index].term);
-    console.log(index);
     card.animate({
         transform: ["rotateY(-180deg)", "rotateY(0deg)"]
     }, {
@@ -120,35 +118,9 @@ const ADD_CARD = () => {
     PREVIEW_CARD(flashcardData.flashcards[0].term);
     FLASHCARD_COUNT();
     SET_PROGRESS();
-    // [...document.querySelectorAll(".card")].forEach((val) => {
-    //     val.onclick = () => {
-    //         val.animate({
-    //             transform: ["rotateY(-180deg)", "rotateY(0deg)"]
-    //         }, {
-    //             duration: 250,
-    //             iterations: 1
-    //         })  
-    //         if (val.querySelector(".card-text").innerHTML === flashcardData.flashcards[0].term) {
-    //             val.querySelector(".card-text").innerHTML = flashcardData.flashcards[0].def;
-    //         } else {
-    //             val.querySelector(".card-text").innerHTML = flashcardData.flashcards[0].term;
-    //         }
-    //     }
-
-    //     val.oncontextmenu = (e) => {
-    //         e.preventDefault();
-    //         document.querySelector("#contextmenu").style = `display: block; top: ${e.offsetY}px; left: ${e.offsetX - 200}px`;
-    //         window.onclick = (e) => {
-    //             if (e.target !== document.querySelector("#contextmenu")) {
-    //                 document.querySelector("#contextmenu").style.display = "none";
-    //             }
-    //         }
-    //     }
-    // })
 }
 
 //code for flashcard starts here //
-// var cards = flashcardData.flashcards;
 
 class Flashcard{
     constructor(term, def){
@@ -163,13 +135,10 @@ class Flashcard{
         var trx = request.result.transaction("flashcards", "readwrite");
         var flashcardObjStore = trx.objectStore("flashcards");
         var data = flashcardObjStore.get(flashcardData.id);
-        console.log(data);
 
         data.onsuccess = function(){
-            // flashcardData.flashcards = cards;
             flashcardData.number = flashcardData.flashcards.length;
             flashcardObjStore.put(flashcardData);
-            console.log(flashcardObjStore.get(flashcardData.id));
         }
     }
     delete(ind){
@@ -210,20 +179,6 @@ class Flashcard{
     }
 }
 
-// if (window.innerWidth <= 420) {
-//     document.querySelector("#set-up_prev").onclick = function (){
-//         if (this.classList.contains("set-up")) {
-//             TOGGLE_FORMS(ev, document.querySelector("#flashcard-data form"), document.querySelector("#flashcard-preview"));
-//             this.textContent = "Go back to setup page";
-//             this.removeAttribute("class");
-//         } else {
-//             TOGGLE_FORMS(ev, document.querySelector("#flashcard-preview"), document.querySelector("#flashcard-data form"));
-//             this.textContent = "Preview Flashcards";
-//             this.setAttribute("class", "set-up");
-//         }
-//     }
-// }
-
 function MOBILE_PREVIEW(el) {
     if (el.classList.contains("set-up")) {
         document.querySelector("#flashcard-preview").style.display = "block";
@@ -245,10 +200,6 @@ document.querySelector("#flashcard-data form").onsubmit = (ev) => {
     ADD_CARD();
     FLASHCARD_COUNT();
     document.querySelector("#flashcard-data form").reset();
-
-    // document.querySelector("#edit-flashcard-btn").onclick = () => {
-    //     card.edit(index);
-    // }
 }
 
 function DELETE_FLASHCARD(){
@@ -258,10 +209,15 @@ function DELETE_FLASHCARD(){
     var trx = request.result.transaction("flashcards", "readwrite");
     var flashcardObjStore = trx.objectStore("flashcards");
     flashcardObjStore.put(flashcardData);
-    
-    PREVIEW_CARD(flashcardData.flashcards[0].term);
-    FLASHCARD_COUNT();
-    SET_PROGRESS();
+    if (flashcardData.flashcards.length) {
+        PREVIEW_CARD(flashcardData.flashcards[0].term);
+        index = 0;
+        FLASHCARD_COUNT();
+        SET_PROGRESS();
+    }else{
+        document.querySelector("#flashcard-count").innerHTML = "";
+        document.querySelector("#level").style.width = "0%";
+    }
 }
 
 function EDIT_CARD(){
@@ -271,15 +227,15 @@ function EDIT_CARD(){
 
 const GO_TO_PREV_CARD = () => {
     try{
-        index--;
-        // console.log(flashcardData.flashcards[index].term);
-        console.log(index);
-        if (index < 0) {
+        if (index <= 0) {
             index = 0;
+            CREATE_MODAL("You have reached the first flashcard");
+        }else{
+            index--;
+            PREVIEW_CARD(flashcardData.flashcards[index].term);
+            FLASHCARD_COUNT();
+            SET_PROGRESS();
         }
-        PREVIEW_CARD(flashcardData.flashcards[index].term);
-        FLASHCARD_COUNT();
-        SET_PROGRESS();
     }catch{
         CREATE_MODAL('OOPS... You have not added any flashcards yet.');
     }
@@ -287,15 +243,15 @@ const GO_TO_PREV_CARD = () => {
 
 const GO_TO_NEXT_CARD = () => {
     try{
-        index++;
-        // console.log(flashcardData.flashcards[index].def);
-        console.log(index);
         if (index >= flashcardData.flashcards.length - 1) {
             index = flashcardData.flashcards.length - 1;
+            CREATE_MODAL("You have reached the last Flashcard.");
+        }else{
+            index++;
+            PREVIEW_CARD(flashcardData.flashcards[index].term);
+            SET_PROGRESS();
+            FLASHCARD_COUNT();
         }
-        PREVIEW_CARD(flashcardData.flashcards[index].term);
-        SET_PROGRESS();
-        FLASHCARD_COUNT();
     }catch{
         CREATE_MODAL('OOPS... You have not added any flashcards yet.');
     }
@@ -326,7 +282,6 @@ if (sessionStorage.getItem("ace-it temp data")) {
         }
     }
 
-    // console.log(flashcardData);
     document.querySelector("#flashcard-data").style.display = "flex";
     document.querySelector("#flashcard-name").style.display = "none";
     
@@ -339,9 +294,7 @@ if (sessionStorage.getItem("ace-it temp data")) {
     flashcardData.flashcards = session.flashcards;
     if (flashcardData.flashcards.length) {
         PREVIEW_CARD(flashcardData.flashcards[0].term);
+        SET_PROGRESS();
+        FLASHCARD_COUNT();
     }
-    // PREVIEW_CARD(flashcardData.flashcards[0].term);
-    // ADD_CARD();
-    SET_PROGRESS();
-    FLASHCARD_COUNT();
 }

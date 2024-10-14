@@ -114,10 +114,15 @@ function GET_CARDS(){
                     }
                     
                     document.querySelector("#del-recent").onclick = function(){
-                        var trx = request.result.transaction("flashcards", "readwrite");
-                        var objectStore = trx.objectStore("flashcards");
-                        objectStore.delete(savedData[i].id);
-                        history.go(0);
+                        var confirmUserAction = confirm(`WARNING! You are about to delete the Set - ${savedData[i].name} and all its related data. This action cannot be reversed. Do you wish to continue?`);
+                        if (confirmUserAction) {
+                            var trx = request.result.transaction("flashcards", "readwrite");
+                            var objectStore = trx.objectStore("flashcards");
+                            objectStore.delete(savedData[i].id);
+                            history.go(0);
+                        }else{
+                            alert("Delete operation cancelled by user.")
+                        }
                     }
                 }
             });
