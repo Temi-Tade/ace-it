@@ -34,6 +34,11 @@
                             <!-- <li><button>New Quiz <i class="fa-soild fa-quiz"></i></button></li> -->
                         </ul>
                     </div>
+
+                    <div class="user-profile-wrap">
+                        <div class="user-profile"></div>
+                        <button onclick="VIEW_PROFILE()">View My Profile</button>
+                    </div>
             </section>
 
             <section id="intro">
@@ -66,31 +71,61 @@
             </section>
         </section>
 
+        <section id="snapshots_wrap">
+            <h2>Study smart while you study hard...</h2>
+            <h4>Top academic performaces requires students to study smart as they study hard. With our study tool, improve how you approach studying and ace them courses!</h4>
+            <div id="snapshots">
+                <ul type="none" id="snapshots_list"></ul>
+            </div>
+            <!-- 
+                images:
+                    - Students studying
+                    - students smiling
+                    - graph showing uptrend in result
+                    - student trying to actively recall something
+                text:
+                    - study smarter, more effectively and improve recall
+                    - set yourself on the path to academic excellence
+                    - increase your productivity while you study
+            -->
+            <div id="get-started">
+                <button>GET STARTED <span class="fa-soild fa-caret-right"></span></button>
+            </div>
+        </section>
+
         <section id="modalbg">
             <div id="modal">{text}</div>
         </section>
 
-        <!-- <footer>
-            <p>Created by Temiloluwa Akintade.</p>
+        <footer>
+            <!-- <p>Created by Temiloluwa Akintade.</p>
             <div>
                 <small>
                     <a href="mailto:devmode006@gmail.com">Report a Bug</a>
                     <a href="https://github.com/Temi-Tade/">GitHub Profile</a>
                 </small>
+            </div> -->
+            <div id="contact">
+                <h4>CONTACT</h4>
+                
             </div>
-        </footer> -->
+        </footer>
     </main>
 
     <script src="./assets/js/userdata.js"></script>
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/snapshots.js"></script>
+    <script src="./assets/js/profile.js"></script>
 </body>
 </html>
 
 <!-- 
     prospective features:
-    - confirm before deleting set
-    - theme
     - user profile page
+        - complete profile (full name, DOB, school name and current education level, gender, pfp)
+        - update lastLogin for every login
+    - scrollbar in my sets
+    - theme
     - integrate firebase
     - disable flashcard form submit btn !!
  -->

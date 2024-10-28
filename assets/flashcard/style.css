@@ -56,7 +56,7 @@ legend{
 
 #flashcard-preview{
     height: 20rem;
-    width: 25%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -107,7 +107,7 @@ legend{
 }
 
 #modalbg{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -126,6 +126,8 @@ legend{
     color: var(--text-color);
     margin: auto;
     text-align: center;
+    max-height: 20rem;
+    overflow-y: auto;
 }
 
 #recent-info{
@@ -147,6 +149,12 @@ legend{
 
 #recent-actions button:last-child{
     background: #f12312;
+}
+
+#recent-actions button:last-child:hover, #recent-actions button:last-child:focus{
+    background-color: #111;
+    border: 1.5px solid #f12312;
+    color: #f12312;
 }
 
 #modal table{
@@ -204,8 +212,8 @@ legend{
 }
 
 #level{
-    padding: .125rem;
-    /* border-radius: 1rem; */
+    padding: .165rem;
+    border-radius: 1rem;
     background: linear-gradient(to right, var(--theme), #f72342);
     display: block;
     width: 0%;

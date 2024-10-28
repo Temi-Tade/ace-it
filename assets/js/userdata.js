@@ -11,11 +11,19 @@ if ("indexedDB" in window) {
         var user_data = {
             userName: "",
             theme: "",
-            previousLogIn: new Date().toUTCString(),
-            userId: crypto.randomUUID()
+            lastLogIn: new Date().toUTCString(),
+            userId: crypto.randomUUID(),
+            pfp: "",
+            fullName: "",
+            gender: "",
+            dob: "",
+            school: {
+                name: "",
+                type: ""
+            }
         }
 
-        var trx = request.result.transaction("user_data", "readonly");
+        var trx = request.result.transaction("user_data", "readwrite");
         var user_data_objStore = trx.objectStore("user_data");
 
         var keys = user_data_objStore.getAll();
@@ -54,6 +62,7 @@ if ("indexedDB" in window) {
                     e.preventDefault();
                     user_data.userName = [...new FormData(e.target).entries()][0][1];
 
+                    var trx = request.result.transaction("user_data", "readwrite");
                     var user_data_objStore = trx.objectStore("user_data");
                     user_data_objStore.add(user_data);
 
@@ -76,5 +85,11 @@ if ("indexedDB" in window) {
         console.error("An error occured while accessing database");
     }
 } else {
-    
+    CREATE_MODAL(`
+        An error occured while trying to create a database. Try:
+        <ul>
+            <li>Updating your browser</li>
+            <li>Accessing this page on another browser</li>
+        </ul>
+    `)
 }

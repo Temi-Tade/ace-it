@@ -25,13 +25,13 @@ const CREATE_MODAL = (text) => {
             setTimeout(() => {
                 document.querySelector("#modalbg").style.display = "none"
             }, 490);
-        }
-    }
-}
+        };
+    };
+};
 
 const TOGGLE_MATERIALS_LIST = (el) => {
     el.nextElementSibling.classList.toggle("expand");
-}
+};
 
 const TYPE_EFFECT = () => {
     let currentWord = words[wordIndex];
@@ -48,8 +48,8 @@ const TYPE_EFFECT = () => {
         isDeleting = !isDeleting;
         wordIndex = !isDeleting ? (wordIndex + 1) % words.length : wordIndex;
         setTimeout(TYPE_EFFECT, 1750);
-    }
-}
+    };
+};
 
 TYPE_EFFECT();
 
@@ -60,14 +60,14 @@ function GET_CARDS(){
         var objectStore = trx.objectStore("flashcards");
         var keys = objectStore.getAll();
         let savedData;
-
+        
         keys.onsuccess = async function(ev){
             savedData = await ev.target.result;
-            document.querySelector("#recent ul").innerHTML = "Loading..."
-            document.querySelector("#recent ul").innerHTML = ""
+            document.querySelector("#recent ul").innerHTML = "Loading...";
+            document.querySelector("#recent ul").innerHTML = "";
 
             if (!ev.target.result.length) {
-                document.querySelector("#recent ul").innerHTML = "<p id='no-flashcard'>You have not created any flashcards.</p>"
+                document.querySelector("#recent ul").innerHTML = "<p id='no-flashcard'>You have not created any flashcard set yet.</p>";
             }
 
             await ev.target.result.forEach(flashcard => {
@@ -103,7 +103,7 @@ function GET_CARDS(){
                             <div id='recent-actions'>
                                 <button id="open-recent">open</button>
                                 <button id="del-recent">delete</button>
-                            </div>
+                                </div>
                         </div>
                     `);
 
@@ -128,18 +128,18 @@ function GET_CARDS(){
             });
         }
     }
-}
+};
 
 function CREATE_NEW(){
-    if (sessionStorage.getItem("ace-it temp data")) {
-        var isActiveSession = confirm("There is currently an active flashcard session, do you want to close the session and create a new flashcard?");
-        if (isActiveSession) {
-            sessionStorage.removeItem("ace-it temp data")
-        }else{
-            alert("Session still active, cannot create new flashcard while another flashcard session is open.");
-            return;
-        }
-    }
+    // if (sessionStorage.getItem("ace-it temp data")) {
+    //     var isActiveSession = confirm("There is currently an active flashcard session, do you want to close the session and create a new flashcard?");
+    //     if (isActiveSession) {
+    //         sessionStorage.removeItem("ace-it temp data")
+    //     }else{
+    //         alert("Session still active, cannot create new flashcard while another flashcard session is open.");
+    //         return;
+    //     }
+    // }
     window.open(`./assets/flashcard/index.html`);
 }
 

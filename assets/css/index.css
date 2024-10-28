@@ -48,6 +48,7 @@ button{
     border-radius: 1rem;
     cursor: pointer;
     font-size: 1rem;
+    display: block;
 }
 
 button:hover{
@@ -95,6 +96,72 @@ button:hover{
 
 #recent button:hover{
     background-color: #3337;
+}
+
+#snapshots_wrap{
+    background-color: #1c1c1c;
+    margin: 1.2rem;
+    padding: 1rem;
+    border-radius: .75rem;
+}
+
+img{
+    border-radius: .75rem;
+}
+
+#snapshots_list li:hover{
+    transform: scale(105%);
+}
+
+::-webkit-scrollbar{
+    /* background-color: #777; */
+    width: .5rem;
+    border-radius: .75rem;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #7777;
+    border-radius: .75rem;
+}
+
+.user-profile-wrap{
+    padding: .5rem;
+}
+
+.user-profile h5{
+    text-align: center;
+    font-size: 1rem;
+}
+
+.user-profile-wrap button{
+    margin: auto;
+}
+
+.user-profile{
+    padding: .5rem;
+}
+
+.user-profile img{
+    display: block;
+    margin: .25rem auto;
+}
+
+#user-profile-form div.field{
+    margin: auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+#user-profile-form .field .label{
+    width: 20%;
+}
+
+footer{
+    background-color: #1c1c1c;
+    padding: 1rem;
 }
 
 @media screen and (max-width: 600px) {
@@ -228,12 +295,12 @@ button:hover{
 
     #about{
         font-size: 1.25rem;
-        margin-top: 4rem;
+        margin: 2.5rem 0;
     }
 
     #dynamic{
         font-size: 3.5rem;
-        padding: 3rem 0;
+        padding: 1rem 0;
     }
 
     #dynamic::after{
@@ -244,5 +311,56 @@ button:hover{
         background-color: var(--theme);
         content: "";
         animation: blink .85s infinite linear;
+    }
+
+    #snapshots_list{
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    #snapshots_list li{
+        padding: .5rem;
+        cursor: pointer;
+        border-radius: .75rem;
+        width: 24.5%;
+    }
+
+    #snapshots_list img{
+        width: 100%;
+    }
+
+    .snapshot_card{
+        position: relative;
+    }
+
+    .snapshot_text{
+        position: absolute;
+        bottom: 0;
+        padding: .5rem;
+        padding-top: 1.75rem;
+        background: linear-gradient(#7770, #5557, #4448, #3339, #222);
+        text-align: center;
+        border-radius:  0 0 .75rem .75rem;
+    }
+
+    #snapshots_wrap h2{
+        font-size: 2rem;
+        padding: 0 1rem;
+    }
+
+    #snapshots_wrap h4{
+        font-size: 1.25rem;
+        padding: .75rem 1rem;
+        font-weight: 100;
+    }
+
+    #get-started{
+        padding: 1.5rem;
+    }
+    
+    #get-started button{
+        display: block;
+        margin: auto;
     }
 }

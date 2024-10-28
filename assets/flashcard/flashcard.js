@@ -1,6 +1,7 @@
 let index = 0;
+let isEdit = false;
 let card;
-var flashcardData = JSON.parse(sessionStorage.getItem("ace-it temp data")) || {
+var flashcardData = sessionStorage.getItem("ace-it temp data") !== "undefined" ? JSON.parse(sessionStorage.getItem("ace-it temp data")) : {
     name: "",
     desc : "",
     flashcards: [],
@@ -37,16 +38,16 @@ const TOGGLE_FORMS = (e, el, other) => {
         </div>
         <p id="tagline"><em></em></p>
         `
-    }
-}
+    };
+};
 
 const VALIDATE_FLASHCARD_NAME = (val) => {
     if (val.length >= 4) {
-        document.querySelector("#flashcard-name-btn").disabled = false
+        document.querySelector("#flashcard-name-btn").disabled = false;
     } else {
-        document.querySelector("#flashcard-name-btn").disabled = true
+        document.querySelector("#flashcard-name-btn").disabled = true;
     }
-    flashcardData.name = val
+    flashcardData.name = val;
 }
 
 const SET_DESC = (val) => {
@@ -60,8 +61,8 @@ const CREATE_MODAL = (text) => {
     }, {
         iterations: 1,
         duration: 500,
-    })
-    document.querySelector("#modal").innerHTML = text
+    });
+    document.querySelector("#modal").innerHTML = text;
 
     window.onclick = (ev) => {
         if (ev.target === document.querySelector("#modalbg")) {
@@ -74,9 +75,9 @@ const CREATE_MODAL = (text) => {
             setTimeout(() => {
                 document.querySelector("#modalbg").style.display = "none"
             }, 490);
-        }
-    }
-}
+        };
+    };
+};
 
 function ROTATE_CARD(card) {
     card.animate({
@@ -89,8 +90,8 @@ function ROTATE_CARD(card) {
         card.querySelector(".card-text").innerHTML = flashcardData.flashcards[index].def;
     } else {
         card.querySelector(".card-text").innerHTML = flashcardData.flashcards[index].term;
-    }
-}
+    };
+};
 
 const PREVIEW_CARD = (index) => {
     document.querySelector("#preview").innerHTML = `
@@ -107,18 +108,21 @@ const PREVIEW_CARD = (index) => {
         window.onclick = (e) => {
             if (e.target !== document.querySelector("#contextmenu")) {
                 document.querySelector("#contextmenu").style.display = "none";
-            }
-        }
-    }
-}
+            };
+        };
+    };
+};
 
 const ADD_CARD = () => {
-    index = 0;
+    // index = 0;
     document.querySelector("#preview").innerHTML = "";
-    PREVIEW_CARD(flashcardData.flashcards[0].term);
+    if (!isEdit) {
+        index = flashcardData.flashcards.length - 1;
+    }
+    PREVIEW_CARD(flashcardData.flashcards[index].term);
     FLASHCARD_COUNT();
     SET_PROGRESS();
-}
+};
 
 //code for flashcard starts here //
 
@@ -126,12 +130,12 @@ class Flashcard{
     constructor(term, def){
         this.term = term;
         this.def = def;
-    }
+    };
     add(){
         flashcardData.flashcards.push({
             term: this.term,
             def: this.def
-        })
+        });
         var trx = request.result.transaction("flashcards", "readwrite");
         var flashcardObjStore = trx.objectStore("flashcards");
         var data = flashcardObjStore.get(flashcardData.id);
@@ -159,6 +163,7 @@ class Flashcard{
             e.preventDefault();
             flashcardData.flashcards[i] = new Flashcard(document.querySelector("#modal form #term").value, document.querySelector("#modal form #def").value);
             ADD_CARD();
+            isEdit = !isEdit;
             var trx = request.result.transaction("flashcards", "readwrite");
             var objectStore = trx.objectStore("flashcards");
             var data = objectStore.get(flashcardData.id);
@@ -198,7 +203,7 @@ document.querySelector("#flashcard-data form").onsubmit = (ev) => {
     card = new Flashcard(document.querySelector("#flashcard-data form #term").value, document.querySelector("#flashcard-data form #def").value);
     card.add();
     ADD_CARD();
-    FLASHCARD_COUNT();
+    // FLASHCARD_COUNT();
     document.querySelector("#flashcard-data form").reset();
 }
 
@@ -221,6 +226,11 @@ function DELETE_FLASHCARD(){
 }
 
 function EDIT_CARD(){
+    isEdit = !isEdit;
+    if (!flashcardData.flashcards.length) {
+        CREATE_MODAL('OOPS... You have not added any flashcards yet.');
+        return;
+    }
     card = new Flashcard(flashcardData.flashcards[index].term, flashcardData.flashcards[index].def);
     card.edit(index);
 }
@@ -229,15 +239,19 @@ const GO_TO_PREV_CARD = () => {
     try{
         if (index <= 0) {
             index = 0;
-            CREATE_MODAL("You have reached the first flashcard");
+            if (flashcardData.flashcards.length) {
+                CREATE_MODAL("You have reached the first flashcard");                
+            }else{
+                CREATE_MODAL('OOPS... You have not added any flashcards yet.');
+            }
         }else{
             index--;
             PREVIEW_CARD(flashcardData.flashcards[index].term);
             FLASHCARD_COUNT();
             SET_PROGRESS();
         }
-    }catch{
-        CREATE_MODAL('OOPS... You have not added any flashcards yet.');
+    }catch(error){
+        console.log(error);
     }
 }
 
@@ -245,15 +259,19 @@ const GO_TO_NEXT_CARD = () => {
     try{
         if (index >= flashcardData.flashcards.length - 1) {
             index = flashcardData.flashcards.length - 1;
-            CREATE_MODAL("You have reached the last Flashcard.");
+            if (flashcardData.flashcards.length) {
+                CREATE_MODAL("You have reached the last Flashcard.");           
+            }else{
+                CREATE_MODAL('OOPS... You have not added any flashcards yet.');
+            }
         }else{
             index++;
             PREVIEW_CARD(flashcardData.flashcards[index].term);
             SET_PROGRESS();
             FLASHCARD_COUNT();
         }
-    }catch{
-        CREATE_MODAL('OOPS... You have not added any flashcards yet.');
+    }catch(error){
+        console.log(error);
     }
 }
 
@@ -275,10 +293,13 @@ if (sessionStorage.getItem("ace-it temp data")) {
         x.onsuccess = function (ev) {
             sessionStorage.setItem("ace-it temp data", JSON.stringify(ev.target.result));
             flashcardData = ev.target.result;
-            PREVIEW_CARD(flashcardData.flashcards[0].term);
-            ADD_CARD();
-            SET_PROGRESS();
-            FLASHCARD_COUNT();
+            document.querySelector("title").innerHTML = `Ace It | ${flashcardData.name}`;
+            if (flashcardData.flashcards.length) {
+                PREVIEW_CARD(flashcardData.flashcards[0].term);
+                // ADD_CARD();
+                SET_PROGRESS();
+                FLASHCARD_COUNT();
+            }
         }
     }
 
