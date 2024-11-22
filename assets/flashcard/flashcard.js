@@ -1,7 +1,7 @@
 let index = 0;
 let isEdit = false;
 let card;
-var flashcardData = sessionStorage.getItem("ace-it temp data") !== "undefined" ? JSON.parse(sessionStorage.getItem("ace-it temp data")) : {
+var flashcardData = sessionStorage.getItem("ace-it temp data") ? JSON.parse(sessionStorage.getItem("ace-it temp data")) : {
     name: "",
     desc : "",
     flashcards: [],
@@ -25,12 +25,12 @@ const TOGGLE_FORMS = (e, el, other) => {
         other.style.display = "flex";
     }
 
-    document.querySelector("#info h2").innerHTML = flashcardData.name
-    document.querySelector("#info em").innerHTML = flashcardData.desc
-    document.querySelector("#edit-info").innerHTML = '<button id="edit" title="Edit"><i class="fa-solid fa-edit"></i></button>'
+    document.querySelector("#info h2").innerHTML = flashcardData.name;
+    document.querySelector("#info em").innerHTML = flashcardData.desc;
+    document.querySelector("#edit-info").innerHTML = '<button id="edit" title="Edit"><i class="fa-solid fa-edit"></i></button>';
     document.querySelector("#edit").onclick = () => {
-        document.querySelector("#flashcard-data").style.display = "none"
-        document.querySelector("#flashcard-name").style.display = "block"
+        document.querySelector("#flashcard-data").style.display = "none";
+        document.querySelector("#flashcard-name").style.display = "block";
         document.querySelector("#info").innerHTML = `
         <div>
             <h2></h2>
@@ -240,7 +240,7 @@ const GO_TO_PREV_CARD = () => {
         if (index <= 0) {
             index = 0;
             if (flashcardData.flashcards.length) {
-                CREATE_MODAL("You have reached the first flashcard");                
+                CREATE_MODAL("<p class='error-head'>You have reached the first flashcard</p>");                
             }else{
                 CREATE_MODAL('OOPS... You have not added any flashcards yet.');
             }
@@ -260,7 +260,13 @@ const GO_TO_NEXT_CARD = () => {
         if (index >= flashcardData.flashcards.length - 1) {
             index = flashcardData.flashcards.length - 1;
             if (flashcardData.flashcards.length) {
-                CREATE_MODAL("You have reached the last Flashcard.");           
+                CREATE_MODAL(`
+                    <p class='error-head'>You have reached the last Flashcard.</p>
+                    <div class='end-of'>
+                        <button>Home</button>
+                        <button>Create New Set</button>
+                    </div>
+                `);
             }else{
                 CREATE_MODAL('OOPS... You have not added any flashcards yet.');
             }

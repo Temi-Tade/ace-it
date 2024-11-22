@@ -1,19 +1,21 @@
-form{
+form {
     padding: .5rem;
     width: 80%;
     margin: 1rem auto;
 }
 
-::placeholder{
+::placeholder {
     color: #aaa;
 }
 
-.field{
+.field {
     margin: 1rem auto;
     justify-content: flex-end;
 }
 
-input, textarea{
+input,
+textarea,
+select {
     display: block;
     background-color: transparent;
     color: var(--text-color);
@@ -26,17 +28,36 @@ input, textarea{
     font-size: 1rem;
 }
 
-legend{
+input:focus,
+textarea:focus,
+select:focus {
+    box-shadow: 0 0 2px 2px #ccc7;
+}
+
+input[type=file] {
+    border: 0;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: #fff;
+    border-radius: .5rem;
+}
+
+option {
+    color: #333;
+}
+
+legend {
     padding: .5rem;
 }
 
-.btn-wrap{
+.btn-wrap {
     padding: .5rem;
     display: flex;
     justify-content: center;
 }
 
-#flashcard-data{
+#flashcard-data {
     display: none;
     justify-content: space-between;
     /* align-items: center; */
@@ -49,12 +70,12 @@ legend{
     max-height: 40rem;
 }
 
-#flashcard-data form{
+#flashcard-data form {
     margin: 1rem;
     width: 70%;
 }
 
-#flashcard-preview{
+#flashcard-preview {
     height: 20rem;
     width: 30%;
     display: flex;
@@ -63,50 +84,51 @@ legend{
     position: relative;
 }
 
-#flashcard-preview h4{
+#flashcard-preview h4 {
     text-align: center;
 }
 
-:disabled{
+:disabled {
+    background: #7777;
+    border: 0;
+}
+
+:disabled:hover {
     background: #7777;
 }
 
-:disabled:hover{
-    background: #7777;
-}
-
-#info{
+#info {
     text-align: center;
     width: 100%;
     padding: .75rem;
 }
 
-#info div{
+#info div {
     display: flex;
 }
 
-#tagline{
+#tagline {
     text-align: left;
 }
 
-#edit{
+#edit {
     background: transparent;
 }
 
-#action-list{
+#action-list {
     display: flex;
     justify-content: space-around;
     padding: .5rem 0;
 }
 
-#action-list button{
+#action-list button {
     border-radius: 50%;
     width: 3rem;
     height: 3rem;
     font-size: 1.5rem;
 }
 
-#modalbg{
+#modalbg {
     position: fixed;
     top: 0;
     left: 0;
@@ -118,7 +140,7 @@ legend{
     backdrop-filter: blur(.25rem);
 }
 
-#modal{
+#modal {
     background-color: #111;
     padding: 1rem;
     width: 80dvw;
@@ -128,46 +150,48 @@ legend{
     text-align: center;
     max-height: 20rem;
     overflow-y: auto;
+    box-shadow: 0 0 7px 0 #777;
 }
 
-#recent-info{
+#recent-info {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#recent-actions{
+#recent-actions {
     display: flex;
     justify-content: space-evenly;
     margin-top: 1rem;
     width: 100%;
 }
 
-#recent-actions button{
+#recent-actions button {
     text-transform: uppercase
 }
 
-#recent-actions button:last-child{
+#recent-actions button:last-child {
     background: #f12312;
 }
 
-#recent-actions button:last-child:hover, #recent-actions button:last-child:focus{
+#recent-actions button:last-child:hover,
+#recent-actions button:last-child:focus {
     background-color: #111;
     border: 1.5px solid #f12312;
     color: #f12312;
 }
 
-#modal table{
+#modal table {
     width: 100%;
     padding: .5rem;
 }
 
-#modal th, #modal td{
+#modal th,#modal td {
     text-align: center;
     padding: 1rem;
 }
 
-.card-wrap{
+.card-wrap {
     padding: .125rem;
     height: 20rem;
     border-radius: .5rem;
@@ -175,10 +199,10 @@ legend{
     cursor: pointer;
 }
 
-.card{
+.card {
     padding: 1.5rem;
     padding-top: 2rem;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     text-align: center;
     height: 100%;
     display: flex;
@@ -190,28 +214,28 @@ legend{
     border-radius: .25rem;
 }
 
-.card p{
+.card p {
     font-size: 150%;
 }
 
-#flashcard-count{
+#flashcard-count {
     display: block;
     text-align: center;
     padding: .25rem;
 }
 
-#flashcard-progress-wrap{
+#flashcard-progress-wrap {
     padding: .5rem;
 }
 
-#progress{
+#progress {
     background-color: #111;
     /* padding: .125rem; */
     border-radius: 1rem;
     width: 100%;
 }
 
-#level{
+#level {
     padding: .165rem;
     border-radius: 1rem;
     background: linear-gradient(to right, var(--theme), #f72342);
@@ -219,7 +243,7 @@ legend{
     width: 0%;
 }
 
-#contextmenu{
+#contextmenu {
     background-color: #111;
     box-shadow: 0 0 1px #777;
     padding: .5rem;
@@ -228,59 +252,66 @@ legend{
     display: none;
 }
 
-form h3{
+form h3 {
     text-align: center;
 }
 
-.mobile{
+.end-of {
+    display: flex;
+    width: 80%;
+    margin: 1rem auto;
+    justify-content: space-around;
+}
+
+.mobile {
     display: none;
 }
 
 @media screen and (max-width: 600px) {
-    .mobile{
+    .mobile {
         display: block;
     }
 
-    html{
+    html {
         height: 100%;
     }
 
-    body{
+    body {
         height: 100%;
     }
 
-    main{
+    main {
         position: relative;
         height: 100%;
     }
 
-    #flashcard-data{
+    #flashcard-data {
         height: 30rem;
     }
 
-    #flashcard-data form{
+    #flashcard-data form {
         width: 100%;
         margin: auto;
     }
 
-    #flashcard-preview{
+    #flashcard-preview {
         display: none;
         width: 100%;
     }
 
-    .preview-wrap{
+    .preview-wrap {
         position: absolute;
         bottom: 2rem;
         left: 0;
         right: 0;
     }
 
-    .preview-wrap button{
+    .preview-wrap button {
         display: block;
         margin: auto;
     }
 
-    .number{
+    .number {
         text-align: center;
         transform: translateY(-3rem);
     }

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/index.css">
     <link rel="stylesheet" href="./assets/flashcard/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/fontawesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
     <title>Ace It!</title>
 </head>
@@ -25,7 +25,7 @@
             <section id="sidebar" class="desktop">
                 <div>
                     <div class="btn-wrap">
-                        <button onclick="TOGGLE_MATERIALS_LIST(this.parentElement)">Create New Study Material <i class="fa-solid fa-plus"></i></button>
+                        <button onclick="TOGGLE_MATERIALS_LIST(this.childNodes[1], this.parentElement)">Create New Study Material <i class="fa-solid fa-caret-down"></i></button>
                     </div>
 
                     <div id="options" class="collapse">
@@ -35,9 +35,10 @@
                         </ul>
                     </div>
 
+                    <!-- only show this if user is registered -->
                     <div class="user-profile-wrap">
-                        <div class="user-profile"></div>
-                        <button onclick="VIEW_PROFILE()">View My Profile</button>
+                        <div class="user-profile" ></div>
+                        <button id="view-profile-btn" onclick="VIEW_PROFILE()">View My Profile <i class="fa-solid fa-user"></i></button>
                     </div>
             </section>
 
@@ -48,12 +49,12 @@
                 </div>
     
                 <div id="about">
-                    <p>Welcome to Ace It! Your tool for creating flashcards on the web!</p>
+                    <p>Study actively, Remember passively.</p>
                 </div>
 
                 <div class="mobile">
                     <div class="btn-wrap">
-                        <button onclick="TOGGLE_MATERIALS_LIST(this.parentElement)">Create New Study Material <i class="fa-solid fa-plus"></i></button>
+                        <button onclick="TOGGLE_MATERIALS_LIST(this.childNodes[1], this.parentElement)">Create New Study Material <i class="fa-solid fa-caret-down"></i></button>
                     </div>
 
                     <div id="options" class="collapse">
@@ -66,7 +67,7 @@
             </section>
 
             <section id="recent" class="deskop">
-                <h3>My Sets</h3>
+                <h3>My Sets <span class="fa-solid fa-file"></span></h3>
                 <ul type="none"></ul>
             </section>
         </section>
@@ -89,7 +90,7 @@
                     - increase your productivity while you study
             -->
             <div id="get-started">
-                <button>GET STARTED <span class="fa-soild fa-caret-right"></span></button>
+                <button>GET STARTED <span class="fa-solid fa-caret-right"></span></button>
             </div>
         </section>
 
@@ -98,16 +99,45 @@
         </section>
 
         <footer>
-            <!-- <p>Created by Temiloluwa Akintade.</p>
-            <div>
-                <small>
-                    <a href="mailto:devmode006@gmail.com">Report a Bug</a>
-                    <a href="https://github.com/Temi-Tade/">GitHub Profile</a>
-                </small>
-            </div> -->
-            <div id="contact">
-                <h4>CONTACT</h4>
-                
+            <div id="footer-top">
+                <div id="contact">
+                    <h4>CONTACT</h4>
+                    <small><em>(For feedback, bug reports and improvements)</em></small>
+                    <p><a href="tel:+2348135189838" class="fa-solid fa-phone">+234 813 518 9838</a></p>
+                    <ul type="none">
+                        <li><a href="mailto:dev.mode006@gmail.com" class="fa-solid fa-envelope"></a></li>
+                        <li><a href="https://x.com/Js_cipher/" class="fa-brands fa-x-twitter"></a></li>
+                        <li><a href="https://github.com/Temi-Tade/" class="fa-brands fa-github"></a></li>
+                        <li><a href="https://t.me/kintade_/" class="fa-brands fa-telegram"></a></li>
+                    </ul>
+                </div>
+    
+                <div id="footer-top-col-2">
+                    <div class="footer-btn-wrap">
+                        <button onclick="INIT_SHARE()" class="transparent-btn">Share Ace It! <span class="fa-solid fa-share"></span></button>
+                    </div>
+
+                    <div class="footer-btn-wrap">
+                        <button onclick="INIT_DONATE()" class="transparent-btn">Support Ace It! <span class="fa-solid fa-donate"></span></button>
+                    </div>
+                </div>
+    
+                <div id="footer-top-col-3">
+                    <h1>Ace It!</h1>
+                </div>
+            </div>
+            <hr/>
+            <div id="footer-bottom">
+                <ul type="none">
+                    <li><button class="transparent-btn" onclick="DISPLAY_TERMS()"><small>Terms of Use</small></button></li>
+                </ul>
+            </div>
+
+            <div id="copyright">
+                <p>
+                    <span>&copy;TenderLuxe 2024. All rights reserved.</span>
+                </p>
+
             </div>
         </footer>
     </main>
@@ -127,5 +157,8 @@
     - scrollbar in my sets
     - theme
     - integrate firebase
-    - disable flashcard form submit btn !!
+    - disable flashcard form submit btn
+    - open new flashcard on same tab
+    - allow user to create new set/go back to home page at the end of one set
+    - ipad mobile view
  -->

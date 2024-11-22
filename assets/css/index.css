@@ -30,6 +30,7 @@ html{
     background-color: var(--bgcolor);
     color: var(--text-color);
     font-family: Ubuntu;
+    scroll-behavior: smooth;
 }
 
 header{
@@ -53,6 +54,16 @@ button{
 
 button:hover{
     background: linear-gradient(to left, var(--theme), #f72342);
+}
+
+.transparent-btn{
+    background: transparent;
+    color: #CCC;
+}
+
+.transparent-btn:hover{
+    background: transparent;
+    text-decoration: underline;
 }
 
 .collapse{
@@ -113,6 +124,38 @@ img{
     transform: scale(105%);
 }
 
+#snapshots_list img{
+    width: 100%;
+}
+
+.snapshot_card{
+    position: relative;
+}
+
+.snapshot_text{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: .5rem;
+    padding-top: 1.75rem;
+    background: linear-gradient(#7770, #5558, #4449, #333A, #222);
+    text-align: center;
+    border-radius:  0 0 .75rem .75rem;
+}
+
+#snapshots_wrap h2{
+    font-size: 2rem;
+    padding: 0 1rem;
+}
+
+#snapshots_wrap h4{
+    font-size: 1.25rem;
+    padding: .75rem 1rem;
+    font-weight: 100;
+}
+
+
 ::-webkit-scrollbar{
     /* background-color: #777; */
     width: .5rem;
@@ -147,21 +190,140 @@ img{
     margin: .25rem auto;
 }
 
+.pfp-field{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pfp-field *{
+    display: block;
+}
+
+.pfp-field img{
+    display: block;
+}
+
+.pfp-field label{
+    background-color: #3451f7;
+    padding: .75rem;
+    border-radius: .3rem;
+    cursor: pointer;
+    margin: .5rem 0;
+    display: none;
+}
+
+.pfp-field label:hover{
+    background-color: #1c3adf;
+}
+
+.pfp-field input{
+    display: none;
+}
+
+#user-profile-form{
+    position: relative;
+}
+
+.edit-profile-btn-wrap{
+    position: absolute;
+    top: -.5rem;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
 #user-profile-form div.field{
     margin: auto;
+    width: 100%;
     padding: 0;
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
 }
 
-#user-profile-form .field .label{
+#user-profile-form .field label{
     width: 20%;
+    font-size: 85%;
+}
+
+.update-field button{
+    display: none;
 }
 
 footer{
     background-color: #1c1c1c;
     padding: 1rem;
+}
+
+#contact ul{
+    padding: .5rem;
+    display: flex;
+}
+
+footer #contact li{
+    display: inline;
+    border-radius: 50%;
+    font-size: 2rem;
+    width: 3rem;
+    height: 3rem;
+}
+
+a, footer #contact a{
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    border-radius: inherit;
+    padding: .5rem;
+}
+
+footer #contact a:hover{
+    transform: scale(1.05);
+    text-decoration: 2px underline;
+}
+
+footer #copyright p{
+    width: 100%;
+}
+
+footer hr{
+    border: .0625rem solid;
+}
+
+footer #copyright span{
+    font-size: medium;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+#footer-bottom ul{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#footer-top-col-3{
+    width: 100%;
+    height: 100%;
+}
+
+#footer-top-col-3 h1{
+    width: 100%;
+    text-align: center;
+    font-size: 5rem;
+}
+
+.error-head{
+    font-size: 1.5rem;
+}
+
+.error li, .error{
+    padding: .5rem;
+    text-align: left;
 }
 
 @media screen and (max-width: 600px) {
@@ -236,7 +398,11 @@ footer{
     }
 
     #options ul button{
-        margin: .125rem 0;
+        margin: .125rem auto;
+    }
+
+    #snapshots_list li{
+        margin-bottom: 1rem;
     }
 
     #recent{
@@ -245,6 +411,13 @@ footer{
 
     #recent button{
         margin-bottom: .5rem;
+    }
+
+    #contact, #footer-top-col-2{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -326,35 +499,6 @@ footer{
         width: 24.5%;
     }
 
-    #snapshots_list img{
-        width: 100%;
-    }
-
-    .snapshot_card{
-        position: relative;
-    }
-
-    .snapshot_text{
-        position: absolute;
-        bottom: 0;
-        padding: .5rem;
-        padding-top: 1.75rem;
-        background: linear-gradient(#7770, #5557, #4448, #3339, #222);
-        text-align: center;
-        border-radius:  0 0 .75rem .75rem;
-    }
-
-    #snapshots_wrap h2{
-        font-size: 2rem;
-        padding: 0 1rem;
-    }
-
-    #snapshots_wrap h4{
-        font-size: 1.25rem;
-        padding: .75rem 1rem;
-        font-weight: 100;
-    }
-
     #get-started{
         padding: 1.5rem;
     }
@@ -362,5 +506,18 @@ footer{
     #get-started button{
         display: block;
         margin: auto;
+    }
+
+    #footer-top{
+        display: grid;
+        grid-template-columns: 2fr 2fr 3fr;
+    }
+    
+    footer div{
+        display: flex;
+        flex-direction: column;
+        align-items:flex-start;
+        align-content: center;
+        justify-content: center;
     }
 }

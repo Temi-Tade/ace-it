@@ -29,8 +29,13 @@ const CREATE_MODAL = (text) => {
     };
 };
 
-const TOGGLE_MATERIALS_LIST = (el) => {
-    el.nextElementSibling.classList.toggle("expand");
+const TOGGLE_MATERIALS_LIST = (el, parent) => {
+    parent.nextElementSibling.classList.toggle("expand");
+    if (parent.nextElementSibling.classList.contains("expand")) {
+        el.setAttribute("class", "fa-solid fa-caret-up");
+    }else{
+        el.setAttribute("class", "fa-solid fa-caret-down");
+    }
 };
 
 const TYPE_EFFECT = () => {
@@ -144,3 +149,67 @@ function CREATE_NEW(){
 }
 
 GET_CARDS();
+
+async function INIT_SHARE(){
+    if ("share" in navigator) {
+        try {
+            await navigator.share({
+                text: "Welcome to Ace It! Your tool for creating flashcards on the web!",
+                title: "Ace It!",
+                url: "http://127.0.0.1:5500/",
+                
+            });
+        } catch (error) {
+            CREATE_MODAL("AN error occured while trying to share.");
+        }
+    } else {
+        CREATE_MODAL(`
+            <p class=error-head>Share action not supported by device or browser.</p>
+            <ul type='none' class='error'>
+                <li>Try:</li>
+                <li>Reloading this page</li>
+                <li>Updating your browser</li>
+                <li>Opening this page on a different browser</li>
+                <li>Opening this page on a different device</li>
+            </ul>
+        `);
+    }
+}
+
+function DISPLAY_TERMS(){
+    CREATE_MODAL(`
+        <h3>PRIVACY POLICY</h3>
+        <ul class='privacy-policy error' type='none'>
+            <li>By using our tool, you agree to the following terms and conditions:</li>
+            <li>That some of your personal information would and information regarding your device, browser, operating system and location would be collected.</li>
+            <li>That the collected information would be used for the following purposes:
+                <ul type='none'>
+                    <li>To provide and improve our services.</li>  
+                    <li>To analyze how our tool is used.</li>  
+                    <li>To protect our website and users.</li>  
+                </ul>
+            </li>
+            <li>That we may share your personal information with third parties like service, hosting and analytic providers if required.</li>            
+        </ul>
+
+        <div class='error'>
+            <h4>Your Rights</h4>
+            <p>You reserve the right to:</p>
+            <ul type='none'>
+                <li>Access your personal information.</li>  
+                <li>Correct your personal information.</li>
+                <li>Delete your personal information.</li>  
+            </ul>
+        </div>
+
+        <div class='error'>
+            <h4>Update to Privacy Policy</h4>
+            <p>&nbsp;We may update this Privacy Policy at intervals, we would notify you of any changes by posting it on our homepage.</p>
+        </div>
+
+        <div class='error'>
+            <h4>Your Rights</h4>
+            <p>&nbsp;For further enquires, contact us at <a href="mailto:dev.mode006@gmail.com">dev.mode006@gmail.com</a></p>
+        </div>
+    `);
+}

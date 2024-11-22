@@ -13,14 +13,14 @@ if ("indexedDB" in window) {
             theme: "",
             lastLogIn: new Date().toUTCString(),
             userId: crypto.randomUUID(),
-            pfp: "",
+            pfp: {
+                file: "",
+                url: ""
+            },
             fullName: "",
             gender: "",
             dob: "",
-            school: {
-                name: "",
-                type: ""
-            }
+            level: ""
         }
 
         var trx = request.result.transaction("user_data", "readwrite");
